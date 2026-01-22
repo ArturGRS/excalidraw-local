@@ -3,7 +3,7 @@ services:
     build: .
     container_name: excalidraw-local
     ports:
-      - "5000:5000"
+      - "5050:5000"
     volumes:
       - excalidraw-data:/app/projects
     restart: unless-stopped
