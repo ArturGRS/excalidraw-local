@@ -1,20 +1,36 @@
-FROM --platform=${BUILDPLATFORM} node:18 AS build
+FROM node:18 AS builder
 
 WORKDIR /opt/node_app
 
 COPY . .
 
-# do not ignore optional dependencies:
-# Error: Cannot find module @rollup/rollup-linux-x64-gnu
-RUN --mount=type=cache,target=/root/.cache/yarn \
-    npm_config_target_arch=${TARGETARCH} yarn --network-timeout 600000
+# Install dependencies
+RUN yarn install --network-timeout 600000
 
-ARG NODE_ENV=production
+# Build
+ENV NODE_ENV=production
+RUN yarn build:packages
+RUN yarn --cwd ./excalidraw-app build
 
-RUN npm_config_target_arch=${TARGETARCH} yarn build:app:docker
+# Server setup
+FROM node:18-alpine
 
-FROM --platform=${TARGETPLATFORM} nginx:1.27-alpine
+WORKDIR /app
 
-COPY --from=build /opt/node_app/excalidraw-app/build /usr/share/nginx/html
+# Copy server files
+COPY file-server ./file-server
+COPY --from=builder /opt/node_app/excalidraw-app/build ./excalidraw-app/build
 
-HEALTHCHECK CMD wget -q -O /dev/null http://localhost || exit 1
+# Install server dependencies
+WORKDIR /app/file-server
+RUN npm install --production
+
+# Create projects directory
+WORKDIR /app
+RUN mkdir projects
+
+# Expose port
+EXPOSE 5000
+
+# Start server
+CMD ["node", "file-server/index.js"]

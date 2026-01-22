@@ -920,6 +920,13 @@ const ExcalidrawWrapper = () => {
           theme={appTheme}
           setTheme={(theme) => setAppTheme(theme)}
           refresh={() => forceRefresh((prev) => !prev)}
+          onOpenProjectBrowser={() => {
+            excalidrawAPI?.updateScene({
+              appState: {
+                openSidebar: { name: "default", tab: "projects" },
+              },
+            });
+          }}
         />
         <AppWelcomeScreen
           onCollabDialogOpen={onCollabDialogOpen}
@@ -987,7 +994,7 @@ const ExcalidrawWrapper = () => {
           }}
         />
 
-        <AppSidebar />
+        <AppSidebar excalidrawAPI={excalidrawAPI} />
 
         {errorMessage && (
           <ErrorDialog onClose={() => setErrorMessage("")}>

@@ -2,13 +2,22 @@ import { DefaultSidebar, Sidebar, THEME } from "@excalidraw/excalidraw";
 import {
   messageCircleIcon,
   presentationIcon,
+  share, // Added share icon
 } from "@excalidraw/excalidraw/components/icons";
 import { LinkButton } from "@excalidraw/excalidraw/components/LinkButton";
 import { useUIAppState } from "@excalidraw/excalidraw/context/ui-appState";
 
+import type { ExcalidrawImperativeAPI } from "@excalidraw/excalidraw/types";
+
+import { ProjectBrowser } from "./ProjectBrowser";
+
 import "./AppSidebar.scss";
 
-export const AppSidebar = () => {
+interface AppSidebarProps {
+  excalidrawAPI: ExcalidrawImperativeAPI | null;
+}
+
+export const AppSidebar = ({ excalidrawAPI }: AppSidebarProps) => {
   const { theme, openSidebar } = useUIAppState();
 
   return (
@@ -26,7 +35,15 @@ export const AppSidebar = () => {
         >
           {presentationIcon}
         </Sidebar.TabTrigger>
+        <Sidebar.TabTrigger
+          tab="projects" // New tab
+          title="Projects"
+          style={{ opacity: openSidebar?.tab === "projects" ? 1 : 0.4 }}
+        >
+          {share}
+        </Sidebar.TabTrigger>
       </DefaultSidebar.TabTriggers>
+
       <Sidebar.Tab tab="comments">
         <div className="app-sidebar-promo-container">
           <div
@@ -50,6 +67,7 @@ export const AppSidebar = () => {
           </LinkButton>
         </div>
       </Sidebar.Tab>
+
       <Sidebar.Tab tab="presentation" className="px-3">
         <div className="app-sidebar-promo-container">
           <div
@@ -73,6 +91,10 @@ export const AppSidebar = () => {
             Sign up now
           </LinkButton>
         </div>
+      </Sidebar.Tab>
+
+      <Sidebar.Tab tab="projects">
+        <ProjectBrowser excalidrawAPI={excalidrawAPI} />
       </Sidebar.Tab>
     </DefaultSidebar>
   );
