@@ -6,5 +6,8 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./projects:/app/projects
+      - excalidraw-data:/app/projects
     restart: unless-stopped
+
+volumes:
+  excalidraw-data:
