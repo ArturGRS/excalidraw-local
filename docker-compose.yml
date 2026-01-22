@@ -1,23 +1,10 @@
+version: "3"
 services:
   excalidraw:
-    build:
-      context: .
-      args:
-        - NODE_ENV=development
-    container_name: excalidraw
+    build: .
+    container_name: excalidraw-local
     ports:
-      - "3000:80"
-    restart: on-failure
-    stdin_open: true
-    healthcheck:
-      disable: true
-    environment:
-      - NODE_ENV=development
+      - "5000:5000"
     volumes:
-      - ./:/opt/node_app/app:delegated
-      - ./package.json:/opt/node_app/package.json
-      - ./yarn.lock:/opt/node_app/yarn.lock
-      - notused:/opt/node_app/app/node_modules
-
-volumes:
-  notused:
+      - ./projects:/app/projects
+    restart: unless-stopped

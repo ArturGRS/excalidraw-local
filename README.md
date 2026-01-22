@@ -64,4 +64,20 @@ Nenhum dado é enviado para servidores externos. O backend é um servidor local 
    Abra [http://localhost:3000](http://localhost:3000) e comece a desenhar!
 
 ---
+
+### 🐳 Rodando com Docker (Recomendado)
+
+Se preferir não instalar nada na sua máquina, use o Docker:
+
+1. **Inicie o container**:
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **Acesse**:
+   Abra [http://localhost:5000](http://localhost:5000)
+
+   > **Nota:** Seus desenhos serão salvos automaticamente na pasta `projects/` do seu computador, mesmo rodando via Docker.
+
+---
 *Baseado no incrível projeto open-source [Excalidraw](https://github.com/excalidraw/excalidraw).*
