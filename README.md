@@ -2,11 +2,28 @@
 
 > *"Minha estrutura lógica de pensamento passa pelo Excalidraw."*
 
-Esta é uma versão especial do Excalidraw, nascida de uma paixão e necessidade pessoal. 
+Esta é uma contribuição para a comunidade **[Excalidraw](https://excalidraw.com)**, nascida de uma necessidade pessoal e do desejo de expandir as possibilidades dessa ferramenta incrível.
+
+Este projeto é um **fork** do [Excalidraw Oficial](https://github.com/excalidraw/excalidraw), adaptado para rodar em ambientes locais (Localhost/VPN) com foco total em **soberania de dados**.
+
+---
+
+### ❤️ Créditos & Projeto Original
+Este projeto só existe graças ao trabalho fantástico do time do Excalidraw.  
+Se você busca a versão web colaborativa oficial, acesse: **[excalidraw.com](https://excalidraw.com)**.
+
+---
+
+## 📖 Sobre esta Versão (Local Edition)
 
 Desde os tempos da faculdade até os projetos mais complexos do meu trabalho, o Excalidraw sempre foi mais que uma ferramenta: foi o lugar onde minhas ideias ganharam vida. Hoje, não consigo imaginar meu fluxo de trabalho sem ele.
 
-Criei esta **Edição Local** para trazer as funcionalidades que sempre sonhei para meu uso diário: **privacidade total e controle absoluto dos meus arquivos**. Diferente da versão web, aqui seus desenhos são seus, salvos no seu disco, para sempre.
+Criei esta **Edição Local** para trazer recursos de nível premium para quem precisa de privacidade absoluta e controle de arquivos:
+
+1.  **Soberania de Dados**: Seus desenhos são arquivos `.excalidraw` reais no seu disco.
+2.  **Server-Side Local**: Um gerenciador de arquivos em Node.js incluído.
+3.  **Ideal para VPNs**: Centralize desenhos de uma equipe em um servidor privado seguro.
+
 
 ## ✨ Principais Diferenciais
 
