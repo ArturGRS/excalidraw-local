@@ -27,4 +27,10 @@ dev-dist
 html
 meta*.json
 .claude
-projects/
+
+# Ignore all projects by default
+projects/*
+# Whitelist specific starter files
+!projects/1 Project.excalidraw
+!projects/2 Project.excalidraw
+!projects/3 Project.excalidraw

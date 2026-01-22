@@ -1,0 +1,54 @@
+/* Custom scrollbar for ProjectBrowser to match Excalidraw look (same as Library) */
+.project-browser-list::-webkit-scrollbar {
+    width: 6px;
+    /* Slightly wider to be easily grabbable/visible */
+    height: 6px;
+}
+
+.project-browser-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.project-browser-list::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb, #999999);
+    border-radius: 10px;
+}
+
+.project-browser-list::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover, #777777);
+}
+
+.project-browser-list::-webkit-scrollbar-thumb:active {
+    background: var(--scrollbar-thumb, #999999);
+}
+
+/* Specific Firefox styling matching global theme */
+.project-browser-list {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb, #999999) transparent;
+}
+
+.project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: background 0.2s;
+    background-color: var(--button-gray-1);
+    color: var(--text-primary-color);
+}
+
+.project-item:hover {
+    background-color: var(--button-gray-2);
+}
+
+.project-item.active {
+    background-color: var(--color-primary-light, #e0efff);
+    border: 1px solid var(--color-primary);
+}
+
+/* Dark mode adjustment if needed, assuming css vars handle it mostly */
+/* If color-primary-light isn't defined, the fallback #e0efff is light blue. 
+   For dark mode, we might need a different fallback or rely on variables. */

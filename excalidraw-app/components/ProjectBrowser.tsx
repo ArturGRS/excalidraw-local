@@ -5,6 +5,8 @@ import { CaptureUpdateAction } from "@excalidraw/excalidraw";
 
 import type { ExcalidrawImperativeAPI } from "@excalidraw/excalidraw/types";
 
+import "./ProjectBrowser.css";
+
 interface ProjectBrowserProps {
   excalidrawAPI: ExcalidrawImperativeAPI | null;
 }
@@ -21,6 +23,9 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [newProjectName, setNewProjectName] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [activeProjectName, setActiveProjectName] = useState<string | null>(
+    () => localStorage.getItem("excalidraw-active-project"),
+  );
 
   const API_BASE = "http://localhost:5000/api/projects";
 
@@ -49,6 +54,12 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
     if (!excalidrawAPI) {
       return;
     }
+
+    // Auto-save current project if it's different
+    if (activeProjectName && activeProjectName !== filename) {
+      await saveProject(activeProjectName);
+    }
+
     setIsLoading(true);
     try {
       const res = await fetch(`${API_BASE}/${filename}`);
@@ -64,6 +75,8 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
         appState: data.appState,
         captureUpdate: CaptureUpdateAction.IMMEDIATELY,
       });
+      setActiveProjectName(filename);
+      localStorage.setItem("excalidraw-active-project", filename);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -71,11 +84,12 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
     }
   };
 
-  const saveProject = async () => {
+  const saveProject = async (targetName?: string) => {
     if (!excalidrawAPI) {
       return;
     }
-    const name = newProjectName.trim() || `project-${Date.now()}.excalidraw`;
+    const name =
+      targetName || newProjectName.trim() || `project-${Date.now()}.excalidraw`;
 
     // Ensure extension
     const filename = name.endsWith(".excalidraw") ? name : `${name}.excalidraw`;
@@ -100,6 +114,8 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
       }
 
       setNewProjectName("");
+      setActiveProjectName(filename);
+      localStorage.setItem("excalidraw-active-project", filename);
       fetchProjects(); // Refresh list
     } catch (err: any) {
       setError(err.message);
@@ -132,14 +148,18 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
     <div
       className="project-browser"
       style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
         padding: "1rem",
         display: "flex",
         flexDirection: "column",
         gap: "1.5rem",
-        height: "100%",
+        overflow: "hidden",
         fontFamily: "var(--ui-font)",
         color: "var(--text-primary-color)",
-        overflow: "hidden",
       }}
     >
       <div style={{ textAlign: "center" }}>
@@ -191,7 +211,7 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
           />
         </div>
         <button
-          onClick={saveProject}
+          onClick={() => saveProject()}
           disabled={isLoading || !excalidrawAPI}
           className="dropdown-menu-item"
           style={{
@@ -224,6 +244,7 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
           marginTop: "0.5rem",
           minHeight: 0,
         }}
+        className="project-browser-list"
       >
         {isLoading && projects.length === 0 ? (
           <div
@@ -258,23 +279,9 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
           projects.map((p) => (
             <div
               key={p.name}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "0.75rem 1rem",
-                borderRadius: "var(--border-radius-md)",
-                cursor: "pointer",
-                transition: "background 0.2s",
-                // Simulate hover effect manually or rely on className if we had CSS
-                backgroundColor: "var(--button-gray-1)",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = "var(--button-gray-2)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.background = "var(--button-gray-1)")
-              }
+              className={`project-item ${
+                p.name === activeProjectName ? "active" : ""
+              }`}
             >
               <div
                 onClick={() => loadProject(p.name)}
@@ -334,7 +341,6 @@ export const ProjectBrowser: React.FC<ProjectBrowserProps> = ({
           ))
         )}
       </div>
-
     </div>
   );
 };

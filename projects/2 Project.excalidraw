@@ -1,0 +1,87 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "http://localhost:3001",
+  "elements": [
+    {
+      "id": "mhhthK2wj_z-W6V1DUrG9",
+      "type": "ellipse",
+      "x": 1673.3462116151495,
+      "y": 4013.3882733290716,
+      "width": 79.08939926258074,
+      "height": 78,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "b81",
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1263732432,
+      "version": 663,
+      "versionNonce": 928876440,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "CJRXJFUDzOgyFQVN-IZNy"
+        }
+      ],
+      "updated": 1769051625213,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "CJRXJFUDzOgyFQVN-IZNy",
+      "type": "text",
+      "x": 1700.3285875030483,
+      "y": 4029.811108862796,
+      "width": 25.199996948242188,
+      "height": 45,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "b82",
+      "roundness": null,
+      "seed": 209162288,
+      "version": 492,
+      "versionNonce": 1750467227,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1769050305793,
+      "link": null,
+      "locked": false,
+      "text": "2",
+      "fontSize": 36,
+      "fontFamily": 5,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "mhhthK2wj_z-W6V1DUrG9",
+      "originalText": "2",
+      "autoResize": true,
+      "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": 20,
+    "gridStep": 5,
+    "gridModeEnabled": false,
+    "viewBackgroundColor": "#ffffff",
+    "lockedMultiSelections": {}
+  },
+  "files": {}
+}
